@@ -1,6 +1,6 @@
 {
     "name": "BeeLine Reader",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Optimize your reading.",
     "browser_action": {
         "default_icon": "images/bee128.png",
