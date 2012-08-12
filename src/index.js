@@ -35,11 +35,13 @@ Beeline.prototype.NewUrl = function(url) {
 
 Beeline.prototype.AddUrlToPage = function(url) {
     var $this = this;
-    $('<div class="row"><div class="span8 box-file"><a href="#"><i class="icon-file"></i> '+url.name+'</a></div></div>').appendTo('#box-files').data(
-        'url-info', {url: url.url, name: url.name}
-    ).click(function() {
-        $this.OpenUrl($(this).data('url-info'));
-    });
+    if (url.name !== undefined) {
+        $('<div class="row"><div class="span8 box-file"><a href="#"><i class="icon-file"></i> '+url.name+'</a></div></div>').appendTo('#box-files').data(
+            'url-info', {url: url.url, name: url.name}
+        ).click(function() {
+            $this.OpenUrl($(this).data('url-info'));
+        });
+    }
 };
 
 Beeline.prototype.RemoveUrlFromPage = function(url) {

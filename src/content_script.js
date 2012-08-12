@@ -1,42 +1,67 @@
 
 function FormatPage() {
-    var max = 170;
-    var page = {};
-    page['title'] = $('title:first').text();
-    page['text'] = '';
+    window.stop();
+    var max = 100;
+    var page = {
+        title: document.title,
+        p: {}
+    };
     $('p').each(function() {
-        page['text'] = page['text'] + ' ' + $(this).text();
+        var $p = $(this);
+        var $key = $p.parent()[0];
+        $key = $key.nodeName+':'+$key.id+':'+$key.className;
+        if (page.p[$key] === undefined) {
+            page.p[$key] = [];
+        }
+        page.p[$key].push($p.text());
     });
+    var len = 0;
+    var key = null;
+    for (var k in page.p) {
+        if (page.p[k].length > len) {
+            len = page.p[k].length;
+            key = k;
+        }
+    }
     $('script').remove();
     $('style').remove();
     $('link').remove();
     $('body').text('');
-    var count = 0;
-    var current;
-    var styles = [
-        '<p style="background:-webkit-gradient(linear,0% 0%,70% 0%,from(black),to(blue),color-stop(0,black));-webkit-background-clip:text;-webkit-text-fill-color:transparent;"></p>',
-        '<p style="background:-webkit-gradient(linear,0% 0%,70% 0%,from(blue),to(black),color-stop(0,blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;"></p>',
-        '<p style="background:-webkit-gradient(linear,0% 0%,70% 0%,from(black),to(red),color-stop(0,black));-webkit-background-clip:text;-webkit-text-fill-color:transparent;"></p>',
-        '<p style="background:-webkit-gradient(linear,0% 0%,70% 0%,from(red),to(black),color-stop(0,red));-webkit-background-clip:text;-webkit-text-fill-color:transparent;"></p>'
-    ];
-    var current_style = 0;
-    for (var c in page['text']) {
-        if (count === 0) {
-            current = $(styles[current_style]);
-            current_style++;
-            if (current_style > styles.length - 1)
-                current_style = 0;
-        }
-        count++;
-        var letter = page['text'][c];
-        $(current).append(letter);
-        if (count > max && letter === ' ') {
-            $('body').append(current);
-            count = 0;
-        }
+    var GetP = function(start, end) {
+        return '<p style="margin:5px 50px 5px 50px;background:-webkit-gradient(linear,0% 0%,70% 0%,from('+start+'),to('+end+'),color-stop(0,'+start+'));-webkit-background-clip:text;-webkit-text-fill-color:transparent;"></p>';
     }
-    if (count !== 0) {
-        $('body').append(current);
+    var styles = [
+        GetP('black', 'blue'),
+        GetP('blue', 'black'),
+        GetP('black', 'red'),
+        GetP('red', 'black')
+    ];
+    for (var k in page.p[key]) {
+        var current_style = 0;
+        var count = 0;
+        var $current_line;
+        var paragraph = page.p[key][k];
+        for (var c in paragraph) {
+            var letter = paragraph[c];
+            if (letter === "\n")
+                letter = ' ';
+            if (count === 0) {
+                $current_line = $(styles[current_style]);
+                current_style++;
+                if (current_style > styles.length - 1)
+                    current_style = 0;
+            }
+            count++;
+            $current_line.append(letter);
+            if (count > max && letter === ' ') {
+                $('body').append($current_line);
+                count = 0;
+            }
+        }
+        if (count !== 0) {
+            $('body').append($current_line);
+        }
+        $('body').append($('<br />'));
     }
 }
 
