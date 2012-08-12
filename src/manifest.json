@@ -1,0 +1,20 @@
+{
+    "name": "BeeLine Reader",
+    "version": "0.0.1",
+    "description": "Optimize your reading.",
+    "browser_action": {
+        //"default_icon": "images/icon19.png",
+        "default_title": "BeeLine Reader",
+        "default_popup": "popup.html"
+    },
+    "background": {
+        "scripts": [ "background.js" ]
+    },
+    "web_accessible_resources": [
+        "pages/housing/index/bootstrap.css",
+        "index.html",
+        "images/donate-green.png"
+    ],
+    "permissions": [ "storage", "tabs", "*://*/" ],
+    "manifest_version": 2
+}

@@ -19,3 +19,11 @@
     -webkit-text-fill-color: transparent;
 }
 
+#setup {
+    width: 60%;
+}
+
+#box-auth-token {
+    width: 40%;
+}
+
