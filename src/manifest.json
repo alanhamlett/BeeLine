@@ -11,9 +11,24 @@
         "scripts": [ "background.js" ]
     },
     "web_accessible_resources": [
-        "pages/housing/index/bootstrap.css",
+        "libs/bootstrap/css/bootstrap.min.css",
+        "style.css",
+        "libs/jquery.min.js",
+        "libs/firebase.js",
+        "libs/bootstrap/js/bootstrap-dropdown.js",
         "index.html",
-        "images/donate-green.png"
+        "index.js",
+        "beeline.js"
+    ],
+    "content_scripts": [
+        {
+            "matches": [ "*://*/*" ],
+            "js": [
+                "libs/jquery.min.js",
+                "content_script.js"
+            ],
+            "run_at": "document_start"
+        }
     ],
     "permissions": [ "storage", "tabs", "*://*/" ],
     "manifest_version": 2
