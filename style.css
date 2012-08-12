@@ -1,0 +1,21 @@
+.black-blue {
+    background: -webkit-linear-gradient(black, blue);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.blue-black {
+    background: -webkit-linear-gradient(blue, black);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.black-red {
+    background: -webkit-linear-gradient(black, red);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.red-black {
+    background: -webkit-linear-gradient(red, black);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
