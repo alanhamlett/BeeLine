@@ -31,6 +31,10 @@
             "run_at": "document_start"
         }
     ],
+    "icons": {
+        "48": "images/bee48.png",
+        "128": "images/bee128.png"
+    },
     "permissions": [ "storage", "tabs", "*://*/" ],
     "manifest_version": 2
 }
