@@ -1,6 +1,5 @@
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
     var currentUrl = tab.url;
-    console.log(currentUrl);
     if (currentUrl !== undefined) {
         var params = currentUrl.split('&');
         for (var a = 0; a < params.length; a++) {

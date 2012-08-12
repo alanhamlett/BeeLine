@@ -88,9 +88,38 @@ Beeline.prototype.SetupBoxAPI = function() {
 Beeline.prototype.SetupBoxFiles = function() {
     this.BoxAPI({
         url: 'folders/0',
-        success: function(json) {
-            console.log(json);
-        },
+        success: $.proxy(function(json) {
+            var items = json.item_collection.entries;
+            for (var i in items) {
+                if (items[i].type === 'file')
+                    this.AddFile(items[i]);
+            }
+        }, this),
+        error: function(message) {
+            console.warn(message);
+        }
+    });
+};
+
+Beeline.prototype.AddFile = function(file) {
+    var $this = this;
+    $('<div class="row"><div class="span8 box-file"><a href="#"><i class="icon-file"></i> '+file.name+'</a></div></div>').appendTo('#box-files').data(
+        'file-info', {id: file.id, name: file.name, type: file.type, etag: file.etag}
+    ).click(function() {
+        $this.OpenFile(this)
+    });
+};
+
+Beeline.prototype.OpenFile = function(fileElement) {
+    var file = $(fileElement).data('file-info');
+    console.log(file);
+    this.BoxAPI({
+        type: 'PUT',
+        url: 'files/'+file.id,
+        data: '{"shared_link": {"access": "open"}}',
+        success: $.proxy(function(json) {
+            window.location = json.shared_link.url;
+        }, this),
         error: function(message) {
             console.warn(message);
         }

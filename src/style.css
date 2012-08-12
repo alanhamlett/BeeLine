@@ -19,11 +19,12 @@
     -webkit-text-fill-color: transparent;
 }
 
-#setup {
-    width: 60%;
-}
-
-#box-auth-token {
-    width: 40%;
+.box-file {
+    /*background-color: #EEE;
+    text-align: center;
+    border-radius: 3px;*/
+    min-height: 30px;
+    line-height: 30px;
+    margin-left: 40px;
 }
 
