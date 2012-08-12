@@ -40,8 +40,21 @@ function FormatPage() {
     }
 }
 
+function SavePage() {
+    var firebase = new Firebase('http://gamma.firebase.com/BeeLine/');
+    var url = window.location.href;
+    firebase.push({name: document.title, url: url});
+}
+
+chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
+    console.log(sender.tab ? "from a content script:" + sender.tab.url : "from the extension");
+    if (request.type == 'BeeLineSavePage') {
+        SavePage();
+        sendResponse({farewell: "goodbye"});
+    }
+});
+
 window.addEventListener('message', function(event) {
-    console.log(event);
     if (event.source !== window) {
         return;
     }

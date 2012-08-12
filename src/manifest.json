@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "description": "Optimize your reading.",
     "browser_action": {
-        //"default_icon": "images/icon19.png",
+        "default_icon": "images/bee128.png",
         "default_title": "BeeLine Reader",
         "default_popup": "popup.html"
     },
@@ -25,6 +25,7 @@
             "matches": [ "*://*/*" ],
             "js": [
                 "libs/jquery.min.js",
+                "libs/firebase.js",
                 "content_script.js"
             ],
             "run_at": "document_start"

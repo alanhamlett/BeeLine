@@ -1,4 +1,10 @@
 $(function() {
-    console.log($('#dummy-focus'));
-    $('#dummy-focus').focus().blur();
+    $('#save-this-page').click(function(e) {
+        e.preventDefault();
+        chrome.tabs.getSelected(null, function(tab) {
+            chrome.tabs.sendMessage(tab.id, {type: 'BeeLineSavePage'}, function(response) {
+                console.log(response.farewell);
+            });
+        });
+    });
 });
